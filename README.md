@@ -57,11 +57,11 @@ spring:
     name: dandan-keycloak
 
 keycloak:
-  url: http://localhost:5000
-  realm: master
-  clientid: admin-cli
-  username: admin
-  password: admin
+  url: <keycloak_url>
+  realm: <realm>
+  clientid: <keycloak_client>
+  username: <username>
+  password: <creds>
 ```
 
 ### 🔐 Notes:
@@ -69,34 +69,6 @@ keycloak:
 * Ensure Keycloak is running
 * Admin credentials must have permission to manage users
 * You can later externalize secrets (Vault recommended)
-
----
-
-## 🚀 Running the Application
-
-### 1. Start Keycloak
-
-```bash
-docker run -p 5000:8080 quay.io/keycloak/keycloak:latest start-dev
-```
-
-### 2. Build the project
-
-```bash
-mvn clean install
-```
-
-### 3. Run the application
-
-```bash
-mvn spring-boot:run
-```
-
-App will start at:
-
-```
-http://localhost:8080
-```
 
 ---
 
