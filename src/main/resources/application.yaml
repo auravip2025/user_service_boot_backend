@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: dandan-keycloak
+
+keycloak:
+  url: http://localhost:5000
+  realm: master
+  clientid: admin-cli
+  username: admin
+  password: admin
