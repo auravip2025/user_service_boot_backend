@@ -9,11 +9,9 @@ import org.keycloak.admin.client.CreatedResponseUtil;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.GroupsResource;
 import org.keycloak.representations.idm.GroupRepresentation;
-import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -59,7 +57,7 @@ public class KeycloakProvisioningService {
     }
 
     public String onboardCustomer(CustomerOnboardRequest request) {
-        String userId = createUser(request.getEmail(), request.getName());
+        String userId = createUser(request.getEmail(), request.getFirstName(), request.getLastName());
         String groupId = findSubGroup(
                 request.getMerchantId(),
                 "customers"
@@ -79,7 +77,7 @@ public class KeycloakProvisioningService {
     }
 
     public String onboardStaff(StaffOnboardRequest request) {
-        String userId = createUser(request.getEmail(), request.getName());
+        String userId = createUser(request.getEmail(), request.getFirstName(), request.getLastName());
         String groupId = findSubGroup(
                 request.getMerchantId(),
                 "staff"
@@ -91,12 +89,13 @@ public class KeycloakProvisioningService {
         return userId;
     }
 
-    private String createUser(String email, String name) {
+    private String createUser(String email, String firstName, String lastName) {
         UserRepresentation user = new UserRepresentation();
         user.setEnabled(true);
         user.setUsername(email);
         user.setEmail(email);
-        user.setFirstName(name);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
         user.setEmailVerified(true);
         user.setRequiredActions(
                 List.of("webauthn-register-passwordless")

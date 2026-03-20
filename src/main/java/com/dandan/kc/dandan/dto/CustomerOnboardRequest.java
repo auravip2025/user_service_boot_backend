@@ -6,7 +6,8 @@ import lombok.Data;
 public class CustomerOnboardRequest {
 
     private String email;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String phone;
     private String merchantId;
 }
